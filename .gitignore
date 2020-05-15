@@ -1,0 +1,16 @@
+﻿# My configurations:
+*.svn
+*.settings
+*.project
+*.classpath
+
+*.jar
+*.war
+*.zip
+*.tar.gz
+*.rar
+.idea
+.metadata
+/target
+*.iml
+*.class
