@@ -26,20 +26,21 @@ public class CodeGeneratorCustomizeSample {
     private static void customizeGenerate() {
         Generator generator = new GeneratorBuilder()
                 // 自定义模块生成文件名称  传入 ModuleEnums 即模块类型
-                // 自定义模块名称优先级高于 配置 模块名称格式化
+                // 自定义模块名称优先级高于 配置文件中配置的模块名称格式化
                 .addModuleNameFormat(ModuleEnums.MAPPER, name ->
                         getRealName(name) +"Dao")
-                // 自定义方法名格式化 传入 MethodEnums.ALL_METHOD 则适用 所有方法名格式化  需要配合配置使用
+                // 自定义方法名格式化 传入 MethodEnums.ALL_METHOD 则适用所有方法名格式化
                 .addMethodNameFormat(MethodEnums.ALL_METHOD, name -> {
                     return getRealName(name);
                 })
-                // 如果单独指定了某方法名格式化  则优先级最高
+                // 如果单独指定了某方法名格式化,则该方法名以单独指定的格式化方式处理
                 .addMethodNameFormat(MethodEnums.COUNT_BY_WHERE, name -> "countByWhere")
                 .build("config.properties");
         generator.generate();
     }
 
     private static String getRealName(String name) {
+        // 该方法为下划线转驼峰
         return GeneratorStringUtils.changeTableName2CamelFirstUpper(name, "_")
                 .replaceAll("Sample", "");
     }
