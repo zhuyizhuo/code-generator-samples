@@ -1,4 +1,4 @@
-package ${javaClassDefinition.POJO.fullPackage};
+package ${javaClassDefinition.MODEL.fullPackage};
 
 <#list tableInfo.importPackages as import>
 	<#if import??>
@@ -9,7 +9,7 @@ import ${import};
 /**
  * 自定义替换系统 MODEL 模板 修改注释信息
  */
-public class ${javaClassDefinition.POJO.className} {
+public class ${javaClassDefinition.MODEL.className} {
 
 <#list tableInfo.columnLists as colm>
 	<#if colm??>

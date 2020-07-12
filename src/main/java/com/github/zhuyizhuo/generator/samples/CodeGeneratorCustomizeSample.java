@@ -15,7 +15,7 @@ import com.github.zhuyizhuo.generator.utils.GeneratorStringUtils;
  *
  * 本项目使用 mysql 数据库示例
  * 如使用 oracle 需添加 oracle 数据库驱动依赖
- * @author yizhuo <br>
+ * @author zhuo <br>
  */
 public class CodeGeneratorCustomizeSample {
 

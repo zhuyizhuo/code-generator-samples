@@ -5,7 +5,7 @@ package ${javaClassDefinition.service.fullPackage};
 import ${import};
     </#if>
 </#list>
-import ${javaClassDefinition.POJO.fullPackage}.${javaClassDefinition.POJO.className};
+import ${javaClassDefinition.MODEL.fullPackage}.${javaClassDefinition.MODEL.className};
 
 /**
  * description : ${tableInfo.tableNameCamelCase}Service <br/>
@@ -17,14 +17,14 @@ public interface ${javaClassDefinition.service.className}{
 	 * method: ${methodDescription.INSERT.methodName} <br>
 	 * description: ${methodDescription.INSERT.comment} <br>
 	 * time: ${classCommentInfo.createTime}
-	 * @param ${javaClassDefinition.POJO.className?uncap_first}
+	 * @param ${javaClassDefinition.MODEL.className?uncap_first}
 	 * @return
 	 */
-	int ${methodDescription.INSERT.methodName}(${javaClassDefinition.POJO.className} ${javaClassDefinition.POJO.className?uncap_first});
+	int ${methodDescription.INSERT.methodName}(${javaClassDefinition.MODEL.className} ${javaClassDefinition.MODEL.className?uncap_first});
 
 	/**
 	 * method: ${methodDescription.QUERY_BY_WHERE.methodName} <br>
 	 */
-    ${javaClassDefinition.POJO.className} ${methodDescription.QUERY_BY_WHERE.methodName} (${javaClassDefinition.POJO.className} ${javaClassDefinition.POJO.className?uncap_first});
+    ${javaClassDefinition.MODEL.className} ${methodDescription.QUERY_BY_WHERE.methodName} (${javaClassDefinition.MODEL.className} ${javaClassDefinition.MODEL.className?uncap_first});
 
 }
