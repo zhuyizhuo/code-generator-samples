@@ -30,32 +30,33 @@ public class CustomizeGenerator {
     }
 
     private static void customizeGenerate() {
-        // 打印生成对象信息 可根据日志编写模板 模板使用 freemarker 编写, 使用 freemarker 语法 取值、循环、判断即可
+        // [可选]打印生成对象信息 可根据日志编写模板 模板使用 freemarker 编写, 使用 freemarker 语法 取值、循环、判断即可
         LogUtils.setLogService(object ->
             System.out.println("生成元信息:\n" + JSON.toJSONString(object))
         );
-        /** 输出路径  */
-        String outputPath = "/src/main/java/";
-        /** 数据库类型 */
-        String dbType = DbTypeEnums.MYSQL.name();
-        /** 数据库驱动 */
-        String dbDriver = "com.mysql.cj.jdbc.Driver";
-        /** 库名 */
-        String tableSchema = "management";
-        /** 数据库链接 */
-        String dbUrl = "jdbc:mysql://localhost:3306/"+tableSchema+"?useUnicode=true&characterEncoding=utf-8&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai";
-        /** 数据库用户名  */
-        String dbUserName = "root";
-        /** 数据库密码  */
-        String dbPassword = "123456";
-        /** 要生成的表名 多个可用英文逗号隔开 */
-        String tableNames = "sys_dict";
-        /** 生成类所在的基础包路径 */
-        String basePackage = "com.generator.mybatis.plus";
-        /** [推荐] 代码注释 作者 */
-        String author = "zhuo";
 
-        // 自定义模块类型
+        /** [必选]数据库配置 可选值参考 DbTypeEnums */
+        String dbType= DbTypeEnums.MYSQL.name();
+        /** [必选]驱动包路径 */
+        String dbDriver= "com.mysql.cj.jdbc.Driver";
+        /** [必选]数据库链接 需改为你的数据库链接 */
+        String dbUrl= "jdbc:mysql://localhost:3306/management?useUnicode=true&serverTimezone=Asia/Shanghai";
+        /** [必选]表空间 如 sql 为 select * from management.demo; 则 management 为表空间 */
+        String tableSchema= "你的数据库表空间";
+        /** [必选]数据库用户名  */
+        String dbUserName= "你的数据库用户名";
+        /** [必选]数据库密码  */
+        String dbPassword= "你的数据库密码";
+
+        /** [建议]要生成的表名 多个可用英文逗号隔开; 缺省为当前表空间下所有表; mysql 数据库表名大小写敏感 */
+        String tableNames = "";
+        /** [建议]生成类所在的基础包路径 */
+        String basePackage = "com.generator.mybatis.plus";
+        /** [建议]生成的代码注释 作者 缺省值为 TODO */
+        String author = "作者";
+        /** [建议]输出路径 1.4.2 版本默认生成至项目根目录 可配置为 /src/main/java/  1.4.3 版本默认生成至 /src/main/java/ */
+        String outputPath = "/src/main/java/";
+        // [可选][自定义扩展] 自定义模块类型
         String customizeModuleType = "page";
         new GeneratorBuilder()
                 .properties("db.type=" + dbType,
