@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.github.generator.mapper.SysDictMapper">
+<mapper namespace="com.generator.mapper.SysDictDao">
 
-    <resultMap id="sysDictResultMap" type="com.github.generator.model.SysDict">
+    <resultMap id="sysDictResultMap" type="com.generator.model.SysDict">
         <id column="id" property="id"/>
         <result column="code_type" property="codeType"/>
         <result column="code_key" property="codeKey"/>
@@ -64,7 +64,7 @@
     </sql>
 
     <!-- 新增数据 -->
-	<insert id="insertSysDict" parameterType="com.github.generator.model.SysDict">
+	<insert id="insertSysDict" parameterType="com.generator.model.SysDict">
         INSERT INTO management.sys_dict (
             <trim suffixOverrides=",">
                 <if test="id != null">id,</if>
@@ -101,13 +101,13 @@
 	</delete>
 
     <!-- 根据传入参数删除数据 -->
-	<delete id="deleteSysDictByWhere" parameterType="com.github.generator.model.SysDict">
+	<delete id="deleteSysDictByWhere" parameterType="com.generator.model.SysDict">
         DELETE FROM management.sys_dict
         <include refid="Where_Clause" />
 	</delete>
 
     <!-- 根据主键更新数据 -->
-    <update id="updateSysDictByPrimaryKey" parameterType="com.github.generator.model.SysDict">
+    <update id="updateSysDictByPrimaryKey" parameterType="com.generator.model.SysDict">
 		UPDATE management.sys_dict
 		<set>
 			<if test="codeType != null">code_type = #{codeType},</if>
@@ -134,7 +134,7 @@
     </select>
 
 	<!-- 根据传入参数查询数据列表  -->
-	<select id="querySysDictListByWhere" resultMap="sysDictResultMap" parameterType="com.github.generator.model.SysDict">
+	<select id="querySysDictListByWhere" resultMap="sysDictResultMap" parameterType="com.generator.model.SysDict">
         SELECT
         <include refid="Base_Column_List" />
   	     FROM management.sys_dict
@@ -142,7 +142,7 @@
     </select>
 
 	<!-- 统计符合条件的数据数量 -->
-	<select id="countSysDictByWhere" resultType="int" parameterType="com.github.generator.model.SysDict">
+	<select id="countByWhere" resultType="int" parameterType="com.generator.model.SysDict">
 		SELECT COUNT(*) FROM management.sys_dict
 		<include refid="Where_Clause" />
 	</select>

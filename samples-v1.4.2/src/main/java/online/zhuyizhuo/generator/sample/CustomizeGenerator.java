@@ -1,7 +1,9 @@
 package online.zhuyizhuo.generator.sample;
 
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.zhuyizhuo.generator.mybatis.enums.DbTypeEnums;
 import com.github.zhuyizhuo.generator.mybatis.enums.ModuleEnums;
 import com.github.zhuyizhuo.generator.mybatis.generator.GeneratorBuilder;
 import com.github.zhuyizhuo.generator.mybatis.generator.extension.CustomizeModuleInfo;
@@ -11,49 +13,58 @@ import com.github.zhuyizhuo.generator.utils.LogUtils;
 
 /**
  * jdk version : 1.8 +
- * class: online.zhuyizhuo.generator.sample.CodeGeneratorCustomizeTempleteSample <br>
- * description: 生成器扩展 <br>
+ * 生成器扩展 <br>
  *     替换系统模板
  *     自定义模块模板
- *      无配置文件生成
- *      打印生成对象信息
+ *     无配置文件生成
+ *     打印生成对象信息
+ *
  * 本项目使用 mysql 数据库示例
  * 如使用 oracle 需添加 oracle 数据库驱动依赖
  * @author zhuo <br>
  */
-public class CodeGeneratorCustomizeTempleteSample {
+public class CustomizeGenerator {
 
     public static void main(String[] args) {
         customizeGenerate();
     }
 
     private static void customizeGenerate() {
-        // 打印生成对象信息  可根据日志编写模板 模板使用 freemarker 编写, 使用 freemarker 语法 取值、循环、判断即可
-        LogUtils.setLogService(object -> {
-            try {
-                System.out.println("生成元信息:\n" + new ObjectMapper().writeValueAsString(object));
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
-        });
+        // 打印生成对象信息 可根据日志编写模板 模板使用 freemarker 编写, 使用 freemarker 语法 取值、循环、判断即可
+        LogUtils.setLogService(object ->
+            System.out.println("生成元信息:\n" + JSON.toJSONString(object))
+        );
+        /** 输出路径  */
+        String outputPath = "/src/main/java/";
+        /** 数据库类型 */
+        String dbType = DbTypeEnums.MYSQL.name();
+        /** 数据库驱动 */
+        String dbDriver = "com.mysql.cj.jdbc.Driver";
+        /** 库名 */
+        String tableSchema = "management";
+        /** 数据库链接 */
+        String dbUrl = "jdbc:mysql://localhost:3306/"+tableSchema+"?useUnicode=true&characterEncoding=utf-8&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai";
+        /** 数据库用户名  */
+        String dbUserName = "root";
+        /** 数据库密码  */
+        String dbPassword = "123456";
+        /** 要生成的表名 多个可用英文逗号隔开 */
+        String tableNames = "sys_dict";
+        /** 生成类所在的基础包路径 */
+        String basePackage = "com.generator.mybatis.plus";
+        /** [推荐] 代码注释 作者 */
+        String author = "zhuo";
 
         // 自定义模块类型
         String customizeModuleType = "page";
-        String basePackage = "com.github.generator.template";
-        String database = "你的数据库名";
-        String dbUserName = "你的数据库用户名";
-        String dbPassword = "你的数据库密码";
-        String outputPath = "/src/main/java/";
         new GeneratorBuilder()
-                .properties("db.type=MYSQL",
-                        "db.driver=com.mysql.cj.jdbc.Driver",
-                        "db.url=jdbc:mysql://localhost:3306/"+database+"?useUnicode=true&characterEncoding=utf-8" +
-                                "&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false" +
-                                "&serverTimezone=Asia/Shanghai",
-                        "db.table-schema="+database,
+                .properties("db.type=" + dbType,
+                        "db.driver=" + dbDriver,
+                        "db.url=" + dbUrl,
+                        "db.table-schema="+ tableSchema,
                         "db.username=" + dbUserName,
                         "db.password=" + dbPassword)
-                .properties("generate.table-names=sample_order,sample_user",
+                .properties("generate.table-names=" + tableNames,
                         // 自定义属性  使用 #{属性名} 可动态获取
                         "basePackage=" + basePackage,
                         "base-out-put-path=" + outputPath,
@@ -70,8 +81,8 @@ public class CodeGeneratorCustomizeTempleteSample {
                         // java 类实际生成全路径为 {generate.base.out-put-path}/{outputPath}/{classPackage}/{className}.java
                         outputPath,
                         "{0}Service"))
-                // 使用自定义模板 替换系统模板  moduleType 与枚举 ModuleEnums 中模块名一致即可替换该模块
-                .addJavaTemplate(new JavaModuleInfo(ModuleEnums.POJO.toString(),
+                // 使用自定义模板
+                .addJavaTemplate(new JavaModuleInfo("MODEL",
                         "/template/model.ftl",
                         basePackage + ".model",
                         // java 类实际生成全路径为 {generate.base.out-put-path}/{outputPath}/{classPackage}/{className}.java

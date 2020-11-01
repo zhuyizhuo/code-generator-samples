@@ -1,7 +1,7 @@
 package ${javaClassDefinition.service.fullPackage};
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import ${javaClassDefinition.MODEL.fullPackage}.${javaClassDefinition.MODEL.className};
+import ${javaClassDefinition.POJO.fullPackage}.${javaClassDefinition.POJO.className};
 
 /**
  * ${tableInfo.tableComment} Service
@@ -9,6 +9,6 @@ import ${javaClassDefinition.MODEL.fullPackage}.${javaClassDefinition.MODEL.clas
  * @author  ${classCommentInfo.author} <br/>
  * @since   ${classCommentInfo.sinceVersion} <br/>
  */
-public interface ${javaClassDefinition.service.className} extends IService<${javaClassDefinition.MODEL.className}> {
+public interface ${javaClassDefinition.service.className} extends IService<${javaClassDefinition.POJO.className}> {
 
 }

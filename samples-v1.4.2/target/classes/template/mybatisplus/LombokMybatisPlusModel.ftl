@@ -1,4 +1,4 @@
-package ${javaClassDefinition.MODEL.fullPackage};
+package ${javaClassDefinition.POJO.fullPackage};
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -19,7 +19,7 @@ import ${import};
  */
 @Data
 @TableName("${tableInfo.tableName}")
-public class ${javaClassDefinition.MODEL.className} implements Serializable {
+public class ${javaClassDefinition.POJO.className} implements Serializable {
     private static final long serialVersionUID=1L;
 <#list tableInfo.primaryKeyColumns as colm>
     <#if colm??>

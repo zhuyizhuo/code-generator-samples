@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.generator.mapper.ZDatabaseChangeLogDao">
+
+    <resultMap id="zDatabaseChangeLogResultMap" type="com.generator.model.ZDatabaseChangeLog">
+        <result column="ID" property="id"/>
+        <result column="AUTHOR" property="author"/>
+        <result column="FILENAME" property="filename"/>
+        <result column="DATEEXECUTED" property="dateexecuted"/>
+        <result column="ORDEREXECUTED" property="orderexecuted"/>
+        <result column="EXECTYPE" property="exectype"/>
+        <result column="MD5SUM" property="md5sum"/>
+        <result column="DESCRIPTION" property="description"/>
+        <result column="COMMENTS" property="comments"/>
+        <result column="TAG" property="tag"/>
+        <result column="LIQUIBASE" property="liquibase"/>
+        <result column="CONTEXTS" property="contexts"/>
+        <result column="LABELS" property="labels"/>
+        <result column="DEPLOYMENT_ID" property="deploymentId"/>
+    </resultMap>
+
+  	<sql id="Where_Clause">
+      <where>
+        <if test="id != null and id != '' ">
+            AND ID = #{id}
+        </if>
+        <if test="author != null and author != '' ">
+            AND AUTHOR = #{author}
+        </if>
+        <if test="filename != null and filename != '' ">
+            AND FILENAME = #{filename}
+        </if>
+        <if test="dateexecuted != null">
+            AND DATEEXECUTED = #{dateexecuted}
+        </if>
+        <if test="orderexecuted != null">
+            AND ORDEREXECUTED = #{orderexecuted}
+        </if>
+        <if test="exectype != null and exectype != '' ">
+            AND EXECTYPE = #{exectype}
+        </if>
+        <if test="md5sum != null and md5sum != '' ">
+            AND MD5SUM = #{md5sum}
+        </if>
+        <if test="description != null and description != '' ">
+            AND DESCRIPTION = #{description}
+        </if>
+        <if test="comments != null and comments != '' ">
+            AND COMMENTS = #{comments}
+        </if>
+        <if test="tag != null and tag != '' ">
+            AND TAG = #{tag}
+        </if>
+        <if test="liquibase != null and liquibase != '' ">
+            AND LIQUIBASE = #{liquibase}
+        </if>
+        <if test="contexts != null and contexts != '' ">
+            AND CONTEXTS = #{contexts}
+        </if>
+        <if test="labels != null and labels != '' ">
+            AND LABELS = #{labels}
+        </if>
+        <if test="deploymentId != null and deploymentId != '' ">
+            AND DEPLOYMENT_ID = #{deploymentId}
+        </if>
+      </where>
+  	</sql>
+
+    <sql id="Base_Column_List">
+        ID,
+        AUTHOR,
+        FILENAME,
+        DATEEXECUTED,
+        ORDEREXECUTED,
+        EXECTYPE,
+        MD5SUM,
+        DESCRIPTION,
+        COMMENTS,
+        TAG,
+        LIQUIBASE,
+        CONTEXTS,
+        LABELS,
+        DEPLOYMENT_ID
+    </sql>
+
+    <!-- 新增数据 -->
+	<insert id="insertZDatabaseChangeLog" parameterType="com.generator.model.ZDatabaseChangeLog">
+        INSERT INTO management.z_database_change_log (
+            <trim suffixOverrides=",">
+                <if test="id != null">ID,</if>
+                <if test="author != null">AUTHOR,</if>
+                <if test="filename != null">FILENAME,</if>
+                <if test="dateexecuted != null">DATEEXECUTED,</if>
+                <if test="orderexecuted != null">ORDEREXECUTED,</if>
+                <if test="exectype != null">EXECTYPE,</if>
+                <if test="md5sum != null">MD5SUM,</if>
+                <if test="description != null">DESCRIPTION,</if>
+                <if test="comments != null">COMMENTS,</if>
+                <if test="tag != null">TAG,</if>
+                <if test="liquibase != null">LIQUIBASE,</if>
+                <if test="contexts != null">CONTEXTS,</if>
+                <if test="labels != null">LABELS,</if>
+                <if test="deploymentId != null">DEPLOYMENT_ID,</if>
+            </trim>
+        ) VALUES (
+            <trim suffixOverrides=",">
+                <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+                <if test="author != null">#{author,jdbcType=VARCHAR},</if>
+                <if test="filename != null">#{filename,jdbcType=VARCHAR},</if>
+                <if test="dateexecuted != null">#{dateexecuted,jdbcType=TIMESTAMP},</if>
+                <if test="orderexecuted != null">#{orderexecuted,jdbcType=INTEGER},</if>
+                <if test="exectype != null">#{exectype,jdbcType=VARCHAR},</if>
+                <if test="md5sum != null">#{md5sum,jdbcType=VARCHAR},</if>
+                <if test="description != null">#{description,jdbcType=VARCHAR},</if>
+                <if test="comments != null">#{comments,jdbcType=VARCHAR},</if>
+                <if test="tag != null">#{tag,jdbcType=VARCHAR},</if>
+                <if test="liquibase != null">#{liquibase,jdbcType=VARCHAR},</if>
+                <if test="contexts != null">#{contexts,jdbcType=VARCHAR},</if>
+                <if test="labels != null">#{labels,jdbcType=VARCHAR},</if>
+                <if test="deploymentId != null">#{deploymentId,jdbcType=VARCHAR},</if>
+            </trim>
+        )
+	</insert>
+
+    <!-- 根据传入参数删除数据 -->
+	<delete id="deleteZDatabaseChangeLogByWhere" parameterType="com.generator.model.ZDatabaseChangeLog">
+        DELETE FROM management.z_database_change_log
+        <include refid="Where_Clause" />
+	</delete>
+
+	<!-- 根据传入参数查询数据列表  -->
+	<select id="queryZDatabaseChangeLogListByWhere" resultMap="zDatabaseChangeLogResultMap" parameterType="com.generator.model.ZDatabaseChangeLog">
+        SELECT
+        <include refid="Base_Column_List" />
+  	     FROM management.z_database_change_log
+        <include refid="Where_Clause" />
+    </select>
+
+	<!-- 统计符合条件的数据数量 -->
+	<select id="countByWhere" resultType="int" parameterType="com.generator.model.ZDatabaseChangeLog">
+		SELECT COUNT(*) FROM management.z_database_change_log
+		<include refid="Where_Clause" />
+	</select>
+</mapper>

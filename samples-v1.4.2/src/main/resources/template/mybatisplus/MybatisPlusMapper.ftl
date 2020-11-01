@@ -2,7 +2,7 @@ package ${javaClassDefinition.MAPPER.fullPackage};
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import ${javaClassDefinition.MODEL.fullPackage}.${javaClassDefinition.MODEL.className};
+import ${javaClassDefinition.POJO.fullPackage}.${javaClassDefinition.POJO.className};
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -12,6 +12,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since   ${classCommentInfo.sinceVersion} <br/>
  */
 @Mapper
-public interface ${javaClassDefinition.MAPPER.className} extends BaseMapper<${javaClassDefinition.MODEL.className}> {
+public interface ${javaClassDefinition.MAPPER.className} extends BaseMapper<${javaClassDefinition.POJO.className}> {
 
 }
