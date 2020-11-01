@@ -9,9 +9,12 @@ import com.github.zhuyizhuo.generator.mybatis.generator.extension.JavaModuleInfo
 
 /**
  * 生成 mybatis plus + lombok + swagger 的代码样式,数据库使用 mysql 为例
+ *
  * 1. 修改数据库名 database 及用户名密码
  * 2. 修改需要生成的表名 tableName 及需要生成到的包路径 basePackage
  * 3. 执行 main 方法
+ *
+ * 生成器 1.4.3 版本已内置 mybatis plus 相关模板
  * @author zhuo
  */
 public class MybatisPlusGenerator {
