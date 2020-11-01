@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.generator.management.repository.SysDictMapper">
+
+    <resultMap id="sysDictResultMap" type="com.github.generator.management.repository.model.SysDict">
+        <id column="id" property="id"/>
+        <result column="code_type" property="codeType"/>
+        <result column="code_key" property="codeKey"/>
+        <result column="code_index" property="codeIndex"/>
+        <result column="code_value" property="codeValue"/>
+        <result column="comment" property="comment"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+  	<sql id="Where_Clause">
+      <where>
+        <if test="id != null">
+            AND id = #{id}
+        </if>
+        <if test="codeType != null and codeType != '' ">
+            AND code_type = #{codeType}
+        </if>
+        <if test="codeKey != null and codeKey != '' ">
+            AND code_key = #{codeKey}
+        </if>
+        <if test="codeIndex != null">
+            AND code_index = #{codeIndex}
+        </if>
+        <if test="codeValue != null and codeValue != '' ">
+            AND code_value = #{codeValue}
+        </if>
+        <if test="comment != null and comment != '' ">
+            AND comment = #{comment}
+        </if>
+        <if test="createBy != null and createBy != '' ">
+            AND create_by = #{createBy}
+        </if>
+        <if test="createTime != null">
+            AND create_time = #{createTime}
+        </if>
+        <if test="updateBy != null and updateBy != '' ">
+            AND update_by = #{updateBy}
+        </if>
+        <if test="updateTime != null">
+            AND update_time = #{updateTime}
+        </if>
+      </where>
+  	</sql>
+
+    <sql id="Base_Column_List">
+        id,
+        code_type,
+        code_key,
+        code_index,
+        code_value,
+        comment,
+        create_by,
+        create_time,
+        update_by,
+        update_time
+    </sql>
+
+    <!-- 新增数据 -->
+	<insert id="insertSysDict" parameterType="com.github.generator.management.repository.model.SysDict">
+        INSERT INTO management.sys_dict (
+            <trim suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="codeType != null">code_type,</if>
+                <if test="codeKey != null">code_key,</if>
+                <if test="codeIndex != null">code_index,</if>
+                <if test="codeValue != null">code_value,</if>
+                <if test="comment != null">comment,</if>
+                <if test="createBy != null">create_by,</if>
+                <if test="createTime != null">create_time,</if>
+                <if test="updateBy != null">update_by,</if>
+                <if test="updateTime != null">update_time,</if>
+            </trim>
+        ) VALUES (
+            <trim suffixOverrides=",">
+                <if test="id != null">#{id,jdbcType=bigint},</if>
+                <if test="codeType != null">#{codeType,jdbcType=VARCHAR},</if>
+                <if test="codeKey != null">#{codeKey,jdbcType=VARCHAR},</if>
+                <if test="codeIndex != null">#{codeIndex,jdbcType=tinyint},</if>
+                <if test="codeValue != null">#{codeValue,jdbcType=VARCHAR},</if>
+                <if test="comment != null">#{comment,jdbcType=VARCHAR},</if>
+                <if test="createBy != null">#{createBy,jdbcType=VARCHAR},</if>
+                <if test="createTime != null">#{createTime,jdbcType=timestamp},</if>
+                <if test="updateBy != null">#{updateBy,jdbcType=VARCHAR},</if>
+                <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+            </trim>
+        )
+	</insert>
+
+    <!-- 根据主键删除数据 -->
+	<delete id="deleteSysDictByPrimaryKey" parameterType="long">
+        DELETE FROM management.sys_dict
+        WHERE id = #{id} 
+	</delete>
+
+    <!-- 根据传入参数删除数据 -->
+	<delete id="deleteSysDictByWhere" parameterType="com.github.generator.management.repository.model.SysDict">
+        DELETE FROM management.sys_dict
+        <include refid="Where_Clause" />
+	</delete>
+
+    <!-- 根据主键更新数据 -->
+    <update id="updateSysDictByPrimaryKey" parameterType="com.github.generator.management.repository.model.SysDict">
+		UPDATE management.sys_dict
+		<set>
+			<if test="codeType != null">code_type = #{codeType},</if>
+			<if test="codeKey != null">code_key = #{codeKey},</if>
+			<if test="codeIndex != null">code_index = #{codeIndex},</if>
+			<if test="codeValue != null">code_value = #{codeValue},</if>
+			<if test="comment != null">comment = #{comment},</if>
+			<if test="createBy != null">create_by = #{createBy},</if>
+			<if test="createTime != null">create_time = #{createTime},</if>
+			<if test="updateBy != null">update_by = #{updateBy},</if>
+			<if test="updateTime != null">update_time = #{updateTime},</if>
+		</set>
+		WHERE
+		 id = #{id}
+	</update>
+
+	<!-- 根据主键查询数据  -->
+	<select id="querySysDictByPrimaryKey" resultMap="sysDictResultMap" parameterType="long">
+        SELECT
+        <include refid="Base_Column_List" />
+  	     FROM management.sys_dict
+        WHERE
+            id = #{id}
+    </select>
+
+	<!-- 根据传入参数查询数据列表  -->
+	<select id="querySysDictListByWhere" resultMap="sysDictResultMap" parameterType="com.github.generator.management.repository.model.SysDict">
+        SELECT
+        <include refid="Base_Column_List" />
+  	     FROM management.sys_dict
+        <include refid="Where_Clause" />
+    </select>
+
+	<!-- 统计符合条件的数据数量 -->
+	<select id="countSysDictByWhere" resultType="int" parameterType="com.github.generator.management.repository.model.SysDict">
+		SELECT COUNT(*) FROM management.sys_dict
+		<include refid="Where_Clause" />
+	</select>
+
+    <!-- 批量插入数据 -->
+	<insert id="batchInsertSysDict" parameterType="java.util.List">
+        INSERT INTO management.sys_dict (
+        <trim suffixOverrides=",">
+				<if test="null != list[0].id">id,</if>
+				<if test="null != list[0].codeType">code_type,</if>
+				<if test="null != list[0].codeKey">code_key,</if>
+				<if test="null != list[0].codeIndex">code_index,</if>
+				<if test="null != list[0].codeValue">code_value,</if>
+				<if test="null != list[0].comment">comment,</if>
+				<if test="null != list[0].createBy">create_by,</if>
+				<if test="null != list[0].createTime">create_time,</if>
+				<if test="null != list[0].updateBy">update_by,</if>
+				<if test="null != list[0].updateTime">update_time,</if>
+        </trim>
+        ) VALUES
+        <foreach collection="list" item="item" index= "index" separator =",">
+            (
+            <trim suffixOverrides=",">
+				<if test="null != item.id">#{item.id,jdbcType=bigint},</if>
+				<if test="null != item.codeType">#{item.codeType,jdbcType=VARCHAR},</if>
+				<if test="null != item.codeKey">#{item.codeKey,jdbcType=VARCHAR},</if>
+				<if test="null != item.codeIndex">#{item.codeIndex,jdbcType=tinyint},</if>
+				<if test="null != item.codeValue">#{item.codeValue,jdbcType=VARCHAR},</if>
+				<if test="null != item.comment">#{item.comment,jdbcType=VARCHAR},</if>
+				<if test="null != item.createBy">#{item.createBy,jdbcType=VARCHAR},</if>
+				<if test="null != item.createTime">#{item.createTime,jdbcType=timestamp},</if>
+				<if test="null != item.updateBy">#{item.updateBy,jdbcType=VARCHAR},</if>
+				<if test="null != item.updateTime">#{item.updateTime,jdbcType=TIMESTAMP},</if>
+            </trim>
+            )
+        </foreach>
+    </insert>
+</mapper>
