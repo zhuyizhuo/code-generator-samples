@@ -54,8 +54,16 @@ public class CustomizeGenerator {
         String basePackage = "com.generator.mybatis.plus";
         /** [建议]生成的代码注释 作者 缺省值为 TODO */
         String author = "作者";
-        /** [建议]输出路径 1.4.2 版本默认生成至项目根目录 可配置为 /src/main/java/  1.4.3 版本默认生成至 /src/main/java/ */
+        /**
+         * [建议] java 类输出路径
+         * 1.4.2 版本缺省配置为 / ,即生成至 generate.base.out-put-path 配置的基础路径下,
+         * 此处更改配置为 /src/main/java/ 则生成路径变为 #{generate.base.out-put-path}/src/main/java/
+         * 1.4.3 版本 java 类输出路径缺省配置更改为 /src/main/java/
+         */
         String outputPath = "/src/main/java/";
+        /** [可选]可设置基础生成路径，默认生成至系统变量 user.dir 路径下，可修改为指定路径 */
+        String baseOutPath = System.getProperty("user.dir") + "/samples-v1.4.2";
+
         // [可选][自定义扩展] 自定义模块类型
         String customizeModuleType = "page";
         new GeneratorBuilder()
@@ -68,11 +76,11 @@ public class CustomizeGenerator {
                 .properties("generate.table-names=" + tableNames,
                         // 自定义属性  使用 #{属性名} 可动态获取
                         "basePackage=" + basePackage,
-                        "base-out-put-path=" + outputPath,
+                        "generate.base.out-put-path=" + baseOutPath,
                         "generate.java.module.mapper.package=#{basePackage}.mapper",
-                        "generate.java.module.mapper.out-put-path=#{base-out-put-path}",
+                        "generate.java.module.mapper.out-put-path=" + outputPath,
                         "generate.java.module.model.package=#{basePackage}.model",
-                        "generate.java.module.model.out-put-path=#{base-out-put-path}",
+                        "generate.java.module.model.out-put-path=" + outputPath,
                         "generate.resources.xml.out-put-path=#{base-out-put-path}/"+
                                 basePackage.replaceAll("\\.","/")+"/xml/")
                 // 自定义模板生成 新增 service 模块
