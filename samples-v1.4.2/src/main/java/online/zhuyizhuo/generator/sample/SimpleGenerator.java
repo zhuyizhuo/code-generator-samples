@@ -14,7 +14,7 @@ public class SimpleGenerator {
 
     public static void main(String[] args) {
         /** 生成的表 */
-        String tableName = "sys_dict";
+        String tableName = "sample_order,sample_user,sample_log";
         Generator generator = new GeneratorBuilder()
                 .properties("generate.table-names=" + tableName)
                 .build("simple_config.properties");
