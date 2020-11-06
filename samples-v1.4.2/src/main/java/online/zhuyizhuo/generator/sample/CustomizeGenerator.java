@@ -55,7 +55,7 @@ public class CustomizeGenerator {
          * [建议] java 类输出路径
          * 1.4.2 版本缺省配置为 / ,即生成至 generate.base.out-put-path 配置的基础路径下,
          * 此处更改配置为 /src/main/java/ 则生成路径变为 #{generate.base.out-put-path}/src/main/java/
-         * 1.4.3 版本 java 类输出路径缺省配置更改为 /src/main/java/
+         * 1.5.0 版本 java 类输出路径缺省配置更改为 /src/main/java/
          */
         String outputPath = "/src/main/java/";
         /** [可选]可设置基础生成路径，默认生成至系统变量 user.dir 路径下，可修改为指定路径 */

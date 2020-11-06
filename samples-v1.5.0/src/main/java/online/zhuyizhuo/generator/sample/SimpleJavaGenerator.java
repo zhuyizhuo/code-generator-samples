@@ -36,7 +36,7 @@ public class SimpleJavaGenerator {
         String author = "作者";
 
         /** [可选]可设置基础生成路径，默认生成至当前项目的根路径，例如多模块项目可将该项设置为子模块的根路径 */
-        String outPath = System.getProperty("user.dir") + "/samples-v1.4.3";
+        String outPath = System.getProperty("user.dir") + "/samples-v1.5.0";
         Map<String, String> properties = new HashMap<>();
         properties.put("db.type", type.name());
         properties.put("db.driver", driver);

@@ -14,7 +14,7 @@ import com.github.zhuyizhuo.generator.mybatis.generator.extension.JavaModuleInfo
  * 2. 修改需要生成的表名 tableName 及需要生成到的包路径 basePackage
  * 3. 执行 main 方法
  *
- * 生成器 1.4.3 版本已内置 mybatis plus 相关模板
+ * 生成器 1.5.0 版本已内置 mybatis plus 相关模板
  * @author zhuo
  */
 public class MybatisPlusGenerator {
@@ -40,7 +40,7 @@ public class MybatisPlusGenerator {
         String basePackage = "com.generator.mybatis.plus";
         /** [建议]生成的代码注释 作者 缺省值为 TODO */
         String author = "作者";
-        /** [建议]输出路径 1.4.2 版本默认生成至项目根目录 可配置为 /src/main/java/  1.4.3 版本默认生成至 /src/main/java/ */
+        /** [建议]输出路径 1.4.2 版本默认生成至项目根目录 可配置为 /src/main/java/  1.5.0 版本默认生成至 /src/main/java/ */
         String outputPath = "/src/main/java/";
 
         Generator generator = new GeneratorBuilder()
