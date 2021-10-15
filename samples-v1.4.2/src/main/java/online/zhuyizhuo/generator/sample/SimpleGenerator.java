@@ -14,10 +14,11 @@ public class SimpleGenerator {
 
     public static void main(String[] args) {
         /** 生成的表 */
-        String tableName = "sample_order,sample_user,sample_log";
+        String tableName = "";
         Generator generator = new GeneratorBuilder()
                 .properties("generate.table-names=" + tableName)
-                .build("simple_config.properties");
+//                .build("simple_config.properties");
+                .build("simple_config_oracle.properties");
         generator.generate();
     }
 }
